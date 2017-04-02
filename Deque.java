@@ -2,7 +2,7 @@
 public interface Deque<E> {
     boolean offerFirst(E e);
     boolean offerLast(E e);
-    E pollFirst();
+    E pollFirst(); //like remove but doesnt throw an error when size is 0
     E pollLast();
     E peekFirst();
     E peekLast();
