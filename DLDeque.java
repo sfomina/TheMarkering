@@ -31,7 +31,7 @@ public class DLDeque<E> {
 	    _front.setPrev(addition);
 	    _front = addition;
 	}
-	_size ++;
+	_size++;
 	return true;
     }
 
@@ -61,10 +61,9 @@ public class DLDeque<E> {
 	    DLLNode<E> temp = _front;
 	    _front = _front.getNext();
 	    _front.setPrev(null);
-	    _size --;
+	    _size--;
 	    return temp.getCargo();
 	}
-
     }
 
     public E pollLast(){
@@ -95,20 +94,43 @@ public class DLDeque<E> {
     }
     
     //DOESN'T WORK
-    public boolean removeFirstOccurrence(Object O){
-	E search = (E) O;
-	DLLNode<E> temp = _front;
-	while (temp.getNext() != null){
-	    if (temp.getNext().getCargo().equals(search)){
-		System.out.println(temp.getNext().getCargo());
-		temp.setNext(temp.getNext().getNext());
-		//System.out.println(temp.getNext().getCargo());
-		temp.getNext().setPrev(temp);
-		_size --;
-		return true;
+    //fixed that ting yuhknow
+    public boolean removeFirstOccurrence( Object O ){
+	E searchVal = (E) O;
+	DLLNode<E> temp = _end;
+
+	while ( temp != null )
+	    {
+		if ( temp.getCargo().equals( O ) )
+		    {
+			if ( temp.getNext() != null )
+			    {
+				temp.getNext().setPrev( temp.getPrev() );
+			    }
+
+			if ( temp.getPrev() != null )
+			    {
+				temp.getPrev().setNext( temp.getNext() );
+			    }
+			return true;
+		    }
+		temp = temp.getPrev();
 	    }
-	    temp = temp.getNext();
-	}
+	return false;
+    }
+    
+    public boolean contains( Object O ){
+	E searchVal = (E) O;
+	DLLNode<E> temp = _end;
+
+	while ( temp != null )
+	    {
+		if ( temp.getCargo().equals( O ) )
+		    {
+			return true;
+		    }
+		temp = temp.getPrev();
+	    }
 	return false;
     }
 			 
@@ -138,7 +160,9 @@ public class DLDeque<E> {
 	System.out.println(sasha.peekLast());
 	sasha.offerFirst("b");
 	System.out.println(sasha);
-	sasha.removeFirstOccurrence("b");
+	System.out.println( sasha.contains( "b" ) );
+	sasha.removeFirstOccurrence( "b" ) ;
+	System.out.println( sasha );
 	
 	
 
