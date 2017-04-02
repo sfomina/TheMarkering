@@ -7,7 +7,7 @@ public interface Deque<E> {
     E peekFirst();
     E peekLast();
     boolean removeFirstOccurrence(Object O);
-    boolean contains(object O);
+    boolean contains(Object O);
     int size();
     //Iterator<E> iterator();
     
