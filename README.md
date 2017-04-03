@@ -40,7 +40,11 @@ Method Selections:
   
   This method converts a queue into a String so that it can be visualized. The retstr is set to be "_front -->". A temporary DLLNode temp is created and set to _front. For as long as _front's cargo is not null, a space and temp.toString is added to the restr. Temp is then set to temp.getNext(). 
   
-  10. iterator 
+  10. ```int size()```
+  
+  This method returns the value of the _size variable. 
+  
+  11. iterator 
    
    This method creates an object of class MyIterator, which allows hasNext(),  next(), 
 
