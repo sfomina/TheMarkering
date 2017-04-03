@@ -1,4 +1,4 @@
-# TheMarkering
+# TheMarkering -- By Jack Cruz, Sasha Fomina, and Daniel Ju
 Method Selections:
 
   As a group, we decided to implement the following methods:
