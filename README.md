@@ -39,6 +39,9 @@ Method Selections:
   
   This method converts a queue into a String so that it can be visualized. The retstr is set to be "_front -->". A temporary DLLNode temp is created and set to _front. For as long as _front's cargo is not null, a space and temp.toString is added to the restr. Temp is then set to temp.getNext(). 
   
+  10. iterator 
+   
+   This method creates an object of class MyIterator, which allows hasNext(),  next(), 
 
 We've decided to use a DLLNode based approach because the fact that each DLLNode has a previous and a next DLLNode is extremely advantageous for a queue that is double sided. ArrayLists and regular LLNodes do not have the capacity to go backwards, since they're all linked only in a single direction. In our actual implementation, the getPrev function of DLLNodes came in extremely handy. 
   
