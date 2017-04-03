@@ -8,7 +8,7 @@ Lab02 -- All Hands on Deque! (Not Schenectady; rather, synecdoche.)
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class DLDeque<E> {
+public class DLDeque<E> implements Deque<E>{
     private DLLNode<E> _end;
     private DLLNode<E> _front;
     int _capacity;
@@ -157,6 +157,11 @@ public class DLDeque<E> {
 	return retStr;
     }
 
+    public int size()
+    {
+	return _size;
+    }
+
     
     public Iterator<E> iterator()
     {
@@ -168,7 +173,6 @@ public class DLDeque<E> {
     {
 	return new MyDescendingIterator();
     }
-
     
     private class MyIterator implements Iterator<E> 
     {

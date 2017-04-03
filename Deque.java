@@ -1,3 +1,4 @@
+import java.util.Iterator;
 
 public interface Deque<E> {
     boolean offerFirst(E e);
