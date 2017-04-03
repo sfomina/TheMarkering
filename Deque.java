@@ -9,6 +9,7 @@ public interface Deque<E> {
     boolean removeFirstOccurrence(Object O);
     boolean contains(Object O);
     int size();
-    //Iterator<E> iterator();
+    Iterator<E> iterator();
+    Iterator<E> descendingIterator();
     
 }

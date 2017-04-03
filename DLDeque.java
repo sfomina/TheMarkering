@@ -1,3 +1,13 @@
+/*
+TheMarkering - Jack Cruse, Sasha Fomina, Daniel Ju
+APCS2 pd4
+Lab02 -- All Hands on Deque! (Not Schenectady; rather, synecdoche.)
+2017-04-02
+*/
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class DLDeque<E> {
     private DLLNode<E> _end;
     private DLLNode<E> _front;
@@ -95,7 +105,8 @@ public class DLDeque<E> {
     
     //DOESN'T WORK
     //fixed that ting yuhknow
-    public boolean removeFirstOccurrence( Object O ){
+    public boolean removeFirstOccurrence( Object O )
+    {
 	E searchVal = (E) O;
 	DLLNode<E> temp = _end;
 
@@ -119,7 +130,8 @@ public class DLDeque<E> {
 	return false;
     }
     
-    public boolean contains( Object O ){
+    public boolean contains( Object O )
+    {
 	E searchVal = (E) O;
 	DLLNode<E> temp = _end;
 
@@ -145,6 +157,183 @@ public class DLDeque<E> {
 	return retStr;
     }
 
+    
+    public Iterator<E> iterator()
+    {
+	return new MyIterator();
+    }
+
+    
+    public Iterator<E> descendingIterator()
+    {
+	return new MyDescendingIterator();
+    }
+
+    
+    private class MyIterator implements Iterator<E> 
+    {
+
+	private DLLNode<E> _dummy; // dummy node to tracking pos
+	private boolean _okToRemove; //flag indicates next() was called
+
+	//constructor 
+	public MyIterator() 
+	{
+	    //place dummy node in front of head
+            //...other housekeeping chores?
+	    _dummy = new DLLNode<E>( null, null, _front );
+	    _okToRemove = false;
+	}
+
+	//--------------v  Iterator interface methods  v-------------
+	//return true if iteration has more elements.
+	public boolean hasNext() 
+	{
+            return _dummy.getNext() != null;
+	}
+
+
+	//return next element in this iteration
+	public E next() 
+	{
+	    _dummy = _dummy.getNext();
+	    E ret = _dummy.getCargo();
+	    _okToRemove = true;
+	    return ret;
+	}
+
+
+	//remove last element returned by this iterator (from last next() call)
+	public void remove() 
+	{
+	    if ( ! _okToRemove )
+		throw new IllegalStateException("must call next() beforehand");
+	    _okToRemove = false;
+
+	    //If removing only remaining node...
+	    //maintain invariant that _dummy always points to a node
+	    //   (...so that hasNext() will not crash)
+	    if ( _size == 1 ) {
+		_dummy = _dummy.getPrev();
+		_front = _end = null;
+		_dummy.setNext( _front );
+	    }
+	    
+	    //if removing first node...
+	    else if ( _dummy.equals( _front ) ) {
+		_dummy = _dummy.getPrev();
+
+		_front = _front.getNext();
+		_front.setPrev( null );
+
+		_dummy.setNext( _front );
+	    }
+
+	    //if removing last node...
+	    else if ( _dummy.equals( _end ) ) {
+		_dummy = _dummy.getPrev();
+
+		_end = _end.getPrev();
+		_end.setNext(null);
+
+		_dummy.setNext( _end );
+	    }
+
+	    //if removing an interior node...
+	    else {
+		_dummy = _dummy.getPrev();		
+		_dummy.setNext( _dummy.getNext().getNext() );
+		_dummy.getNext().setPrev( _dummy );
+	    }		     
+
+	    _size--; //decrement size attribute of outer class LList
+	}
+	//--------------^  Iterator interface methods  ^--------------
+    }//*************** end inner class MyIterator ***************
+
+    
+    private class MyDescendingIterator implements Iterator<E> 
+    {
+
+	private DLLNode<E> _dummy; // dummy node to tracking pos
+	private boolean _okToRemove; //flag indicates next() was called
+
+	//constructor 
+	public MyDescendingIterator() 
+	{
+	    //place dummy node in front of head
+            //...other housekeeping chores?
+	    _dummy = new DLLNode<E>( null, _end, null );
+	    _okToRemove = false;
+	}
+
+	//--------------v  Iterator interface methods  v-------------
+	//return true if iteration has more elements.
+	public boolean hasNext() 
+	{
+            return _dummy.getPrev() != null;
+	}
+
+
+	//return next element in this iteration
+	public E next() 
+	{
+	    _dummy = _dummy.getPrev();
+	    E ret = _dummy.getCargo();
+	    _okToRemove = true;
+	    return ret;
+	}
+
+
+	//remove last element returned by this iterator (from last next() call)
+	public void remove() 
+	{
+	    if ( ! _okToRemove )
+		throw new IllegalStateException("must call next() beforehand");
+	    _okToRemove = false;
+
+	    //If removing only remaining node...
+	    //maintain invariant that _dummy always points to a node
+	    //   (...so that hasNext() will not crash)
+	    if ( _size == 1 ) {
+		_dummy = _dummy.getNext();
+		_front = _end = null;
+		_dummy.setPrev( _end );
+	    }
+	    
+	    //if removing first node...
+	    else if ( _dummy.equals( _end ) ) {
+		_dummy = _dummy.getNext();
+
+		_end = _end.getPrev();
+		_end.setNext( null );
+
+		_dummy.setPrev( _end );
+	    }
+
+	    //if removing last node...
+	    else if ( _dummy.equals( _front ) ) {
+		_dummy = _dummy.getNext();
+
+		_front = _front.getNext();
+		_front.setPrev(null);
+
+		_dummy.setPrev( _front );
+	    }
+
+	    //if removing an interior node...
+	    else {
+		_dummy = _dummy.getNext();		
+		_dummy.setPrev( _dummy.getPrev().getPrev() );
+		_dummy.getPrev().setNext( _dummy );
+	    }		     
+
+	    _size--; //decrement size attribute of outer class LList
+	}
+	//--------------^  Iterator interface methods  ^--------------
+    }//*************** end inner class MyDescendingIterator ***************
+    
+
     public static void main(String[] args){
 	DLDeque<String> sasha = new DLDeque<String>();
 	sasha.offerLast("a");
@@ -163,9 +352,6 @@ public class DLDeque<E> {
 	System.out.println( sasha.contains( "b" ) );
 	sasha.removeFirstOccurrence( "b" ) ;
 	System.out.println( sasha );
-	
-	
-
     }
     
 }
