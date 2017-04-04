@@ -162,6 +162,9 @@ public class DLDeque<E> implements Deque<E>{
 	return _size;
     }
 
+    public boolean isFull(){
+	return (_capacity == _size);
+    }
     
     public Iterator<E> iterator()
     {
