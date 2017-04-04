@@ -44,7 +44,11 @@ Method Selections:
   
   This method returns the value of the _size variable. 
   
-  11. iterator 
+  11. ```boolean isFull()```
+  
+  This method returns whether or not the queue is full by seeing if the capacity is equal to the size. 
+  
+  12. iterator 
    
    This method creates an object of class MyIterator, which allows hasNext(),  next(), 
 
