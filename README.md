@@ -48,9 +48,9 @@ Method Selections:
   
   This method returns whether or not the queue is full by seeing if the capacity is equal to the size. 
   
-  12. iterator 
+  12. ```Iterator<E> iterator()```
    
-   This method creates an object of class MyIterator, which allows hasNext(),  next(), 
+   This method creates an object of class MyIterator, which allows hasNext(),  next(), and remove(). This allows you to traverse the DLLNode using an iterator. This is done by creating a temporary or temp Node that is used to traverse the array and make removals or call next().
 
 We've decided to use a DLLNode based approach because the fact that each DLLNode has a previous and a next DLLNode is extremely advantageous for a queue that is double sided. ArrayLists and regular LLNodes do not have the capacity to go backwards, since they're all linked only in a single direction. In our actual implementation, the getPrev function of DLLNodes came in extremely handy. 
   
