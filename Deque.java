@@ -12,6 +12,6 @@ public interface Deque<E> {
     int size();
     boolean isFull();
     Iterator<E> iterator();
-    Iterator<E> descendingIterator();
+    //Iterator<E> descendingIterator();
     
 }

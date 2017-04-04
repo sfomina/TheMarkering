@@ -189,11 +189,12 @@ public class DLDeque<E> implements Deque<E>{
 	return new MyIterator();
     }
 
-    
+    /*
     public Iterator<E> descendingIterator()
     {
 	return new MyDescendingIterator();
     }
+    */
     
     private class MyIterator implements Iterator<E> 
     {
@@ -281,7 +282,7 @@ public class DLDeque<E> implements Deque<E>{
 	//--------------^  Iterator interface methods  ^--------------
     }//*************** end inner class MyIterator ***************
 
-    
+    /*
     private class MyDescendingIterator implements Iterator<E> 
     {
 
@@ -293,7 +294,7 @@ public class DLDeque<E> implements Deque<E>{
 	{
 	    //place dummy node in front of head
             //...other housekeeping chores?
-	    _dummy = _end;
+	    _dummy = new DLLNode<E>( null, _end, null );
 	    _okToRemove = false;
 	}
 
@@ -308,7 +309,8 @@ public class DLDeque<E> implements Deque<E>{
 	//return next element in this iteration
 	public E next() 
 	{
-	    if(_size == 1){
+	    System.out.println("SIZE: " + _size);
+	    if (_size == 1){
 		_okToRemove = true;
 		return null;
 	    }
@@ -332,37 +334,33 @@ public class DLDeque<E> implements Deque<E>{
 	    //maintain invariant that _dummy always points to a node
 	    //   (...so that hasNext() will not crash)
 	    if ( _size == 1 ) {
-		//_dummy = _dummy.getNext();
-		_front = _end = null;
-		_dummy = null;
-		//_dummy.setPrev( _end );
+		_dummy = _dummy.getNext();
+		_end = _front = null;
 	    }
 	    
-	    //if removing last node...
+	    //if removing first node...
 	    else if ( _dummy.equals( _end ) ) {
-		//System.out.println("SDFFFFFFFFFFFFFFF");
-		_dummy = _dummy.getPrev();
-		_dummy.setNext(null);
-		_end = _end.getPrev();
-		_end.setNext( null );
+		_dummy = _dummy.getNext();
 
+		_end = _end.getPrev();
+		_end.setNext( _dummy );
 
 	    }
 
-	    //if removing first node...
+	    //if removing last node...
 	    else if ( _dummy.equals( _front ) ) {
 		_dummy = _dummy.getNext();
 
 		_front = _front.getNext();
 		_front.setPrev(null);
 
-		//	_dummy.setPrev( _front );
+		_dummy.setPrev( _front );
 	    }
-
+	    
 	    //if removing an interior node...
 	    else {
 		_dummy = _dummy.getNext();		
-		//_dummy.setPrev( _dummy.getPrev().getPrev() );
+		_dummy.setPrev( _dummy.getPrev().getPrev() );
 		_dummy.getPrev().setNext( _dummy );
 	    }		     
 
@@ -370,8 +368,9 @@ public class DLDeque<E> implements Deque<E>{
 	}
 	//--------------^  Iterator interface methods  ^--------------
     }//*************** end inner class MyDescendingIterator ***************
+    */
     
-
+    
     public static void main(String[] args){
 	DLDeque<String> sasha = new DLDeque<String>();
 	sasha.offerLast("a");
@@ -391,14 +390,14 @@ public class DLDeque<E> implements Deque<E>{
 	sasha.removeFirstOccurrence( "b" ) ;
 	System.out.println( sasha );
 	System.out.println("TESTING ITERATOR");
-	Iterator stuff = sasha.descendingIterator();
+	Iterator<String> stuff = sasha.iterator();
 	stuff.next();
 	System.out.println(sasha);	
 	stuff.remove();
 	System.out.println(sasha);
-	//stuff.next();
-	//stuff.remove();
-	//System.out.println(sasha);
+	stuff.next();
+	stuff.remove();
+	System.out.println(sasha);
     }
     
 }
