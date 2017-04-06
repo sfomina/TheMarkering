@@ -3,11 +3,11 @@
 // HW #29: Stress is the Best
 // 2017-4-4
 
-public class DequeTester<T> {
+public class DequeTester2<T> {
 
     public static void main(String[] args) {
 
-	DequeTester<String> a = new Deque<String>();
+	DequeTester2<String> a = new Deque<String>();
 
 	System.out.println("==============DEQUE a==============");
 
