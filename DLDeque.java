@@ -96,8 +96,13 @@ public class DLDeque<E> implements Deque<E>{
     //if size is 0 returns null, otherwise returns item removed
     public E pollLast(){
 	if (_size == 0){
-	    System.out.println("SIZE IS 0");
+	    //System.out.println("SIZE IS 0");
 	    return null;
+	}
+	else if (_size == 1){
+	    E temp = _end.getCargo;
+	    _end = null;
+	    return temp;
 	}
 	else {
 	    DLLNode<E> temp = _end;
