@@ -119,6 +119,7 @@ public class DequeTester {
 	System.out.println(experiment.poll());
 	System.out.println(experiment.poll());
 	*/
+	System.out.println(experiment);
 
 	System.out.println("\nShould return null...");
         System.out.println(experiment.pollFirst());
