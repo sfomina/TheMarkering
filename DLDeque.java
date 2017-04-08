@@ -100,7 +100,7 @@ public class DLDeque<E> implements Deque<E>{
 	    return null;
 	}
 	else if (_size == 1){
-	    E temp = _end.getCargo;
+	    E temp = _end.getCargo();
 	    _end = null;
 	    return temp;
 	}
