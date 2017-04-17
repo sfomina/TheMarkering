@@ -3,11 +3,11 @@
 // HW #29: Stress is the Best
 // 2017-4-4
 
-public class DequeTester2<T> {
+public class DequeTester2 {
 
     public static void main(String[] args) {
 
-	DequeTester2<String> a = new Deque<String>();
+	Deque<String> a = new DLDeque<String>();
 
 	System.out.println("==============DEQUE a==============");
 
@@ -94,6 +94,7 @@ public class DequeTester2<T> {
 	System.out.println(a.pollFirst());
 	// am
 	System.out.println(a.pollLast());
+
 	
 	// Empty deque
 	System.out.println("\nEmpty Deque Dequeue (return null)...");
