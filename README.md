@@ -14,11 +14,11 @@ Method Selections:
   
   3.   ``` E pollFirst(); ```
   
-  This method removes an element from the front of the queue. If the size of the queue is 0, then null is returned since the queue is empty. Otherwise, a temporary DLLNode named temp is created and its value is set to _front. The value of _front is then set to _front's next node. Since we wish to remove what's in the front, _front's previous node is set to null. Then the size is decremented by one and the cargo of temp is returned since we wish to return the deleted value. 
+  This method removes an element from the front of the queue. If the size of the queue is 0, then null is returned since the queue is empty. Otherwise, a temporary DLLNode named temp is created and its value is set to _front. The value of _front is then set to _front's next node. Since we wish to remove what's in the front, _front's previous node is set to null. Then the size is decremented by one and the cargo of temp is returned since we wish to return the deleted value. After the code review, we added a condition that asked if the size was one in which case it would set the _front and _end to null.
   
 4. ```E pollLast();```
 
- Similar to pollFirst, this method removes an element from the end of the queue. If the size of the queue is 0, then null is returned since the queue is empty. Otherwise, a temporary DLLNode named temp is created and its value is set to _end. The value of _end is then set to _end's  previous node. Since we wish to remove what's in the back, _end's next node is set to null. Then the size is decremented by one and the cargo of temp is returned since we wish to return the deleted value. 
+ Similar to pollFirst, this method removes an element from the end of the queue. If the size of the queue is 0, then null is returned since the queue is empty. Otherwise, a temporary DLLNode named temp is created and its value is set to _end. The value of _end is then set to _end's  previous node. Since we wish to remove what's in the back, _end's next node is set to null. Then the size is decremented by one and the cargo of temp is returned since we wish to return the deleted value. After the code review, we added a condition that asked if the size was one in which case it would set the _front and _end to null.
  
  5.    ```E peekFirst();```
  
